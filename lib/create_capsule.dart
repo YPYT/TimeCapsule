@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer';
 
 class CreateScreen extends StatefulWidget {
   const CreateScreen({super.key});
@@ -8,8 +12,10 @@ class CreateScreen extends StatefulWidget {
 }
 
 class _CreateScreenState extends State<CreateScreen> {
-  DateTime? _selectedDate = null;
-  TextEditingController _dateController = TextEditingController();
+  String _message = "";
+  String _address = "";
+  DateTime? _selectedDate;
+  final TextEditingController _dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +38,25 @@ class _CreateScreenState extends State<CreateScreen> {
             decoration: InputDecoration(
               labelText: 'Message',
             ),
+            onChanged: (newVal) {
+              _message = newVal;
+            },
           ),
           TextField(
             decoration: InputDecoration(
               labelText: 'Address',
             ),
+            onChanged: (newVal) {
+              _address = newVal;
+            },
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               elevation: 0,
             ),
-            onPressed: () {},
+            onPressed: () {
+              _onBuryPressed();
+            },
             child: Text("Bury!"),
           ),
         ],
@@ -64,5 +78,31 @@ class _CreateScreenState extends State<CreateScreen> {
         _dateController.text = picked.toString().split(" ")[0];
       });
     }
+  }
+
+  Future<void> _onBuryPressed() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // Get capsules list
+    final capsulesString = prefs.getString('capsules') ?? "[]";
+    final capsules = jsonDecode(capsulesString) as List<dynamic>;
+    log('Capsules: $capsules');
+
+    if (_message.isEmpty || _address.isEmpty || _selectedDate == null) {
+      return;
+    }
+
+    // Insert new capsule into list
+    final capsuleData = {
+      "message": _message,
+      "date": _selectedDate.toString(),
+      "address": _address
+    };
+    capsules.add(capsuleData);
+
+    // Write back to storage
+    final finalCapsulesString = jsonEncode(capsules);
+    log('final capsules: $finalCapsulesString');
+    await prefs.setString('capsules', finalCapsulesString);
   }
 }
