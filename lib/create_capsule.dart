@@ -11,6 +11,7 @@ class CreateScreen extends StatefulWidget {
 }
 
 class _CreateScreenState extends State<CreateScreen> {
+  String _title = "";
   String _message = "";
   String _address = "";
   DateTime? _selectedDate;
@@ -31,6 +32,14 @@ class _CreateScreenState extends State<CreateScreen> {
             readOnly: true,
             onTap: (){
               _selectDate(context);
+            },
+          ),
+          TextField(
+            decoration: InputDecoration(
+              labelText: 'Title',
+            ),
+            onChanged: (newVal) {
+              _title = newVal;
             },
           ),
           TextField(
@@ -57,6 +66,15 @@ class _CreateScreenState extends State<CreateScreen> {
               _onBuryPressed();
             },
             child: Text("Bury!"),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation: 0,
+            ),
+            onPressed: () {
+              _onDeleteAllDataPressed();
+            },
+            child: Text("Delete All Data"),
           ),
         ],
       )
@@ -85,14 +103,14 @@ class _CreateScreenState extends State<CreateScreen> {
     // Get capsules list
     final capsulesString = prefs.getString('capsules') ?? "[]";
     final capsules = jsonDecode(capsulesString) as List<dynamic>;
-    log('Capsules: $capsules');
 
-    if (_message.isEmpty || _address.isEmpty || _selectedDate == null) {
+    if (_title.isEmpty || _message.isEmpty || _address.isEmpty || _selectedDate == null) {
       return;
     }
 
     // Insert new capsule into list
     final capsuleData = {
+      "title": _title,
       "message": _message,
       "date": _selectedDate.toString(),
       "address": _address
@@ -103,5 +121,12 @@ class _CreateScreenState extends State<CreateScreen> {
     final finalCapsulesString = jsonEncode(capsules);
     log('final capsules: $finalCapsulesString');
     await prefs.setString('capsules', finalCapsulesString);
+  }
+
+  // TEMP
+  Future<void> _onDeleteAllDataPressed() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('capsules');
+    await prefs.remove('unlocked_capsules');
   }
 }

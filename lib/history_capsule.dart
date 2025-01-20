@@ -32,7 +32,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             for (final capsule in snapshot.data!) {
               capsuleDisplayList.add(Column(
                   children: [
-                    Text("Message: ${capsule["message"]}, Date: ${capsule["date"]}, Address: ${capsule["address"]}"),
+                    Text("Title: ${capsule["title"]}, Message: ${capsule["message"]}, Date: ${capsule["date"]}, Address: ${capsule["address"]}"),
                     ElevatedButton(
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => UnlockedCapsuleScreen(capsule: capsule)));

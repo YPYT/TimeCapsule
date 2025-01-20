@@ -84,7 +84,7 @@ class _ViewScreenRowState extends State<ViewScreenRow> {
   Widget build(BuildContext context) {
     return Column(
         children: [
-          Text("Message: ${widget.capsule["message"]}, Date: ${widget.capsule["date"]}, Address: ${widget.capsule["address"]}"),
+          Text("Title: ${widget.capsule["title"]}, Message: ${widget.capsule["message"]}, Date: ${widget.capsule["date"]}, Address: ${widget.capsule["address"]}"),
           ElevatedButton(
               onPressed: () {_onUnlockPressed(context, widget.index);},
               child: const Text("Unlock")
