@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
 import 'dart:convert';
+import 'unlocked_capsule.dart';
 
 class ViewScreen extends StatefulWidget {
   const ViewScreen({super.key});
@@ -34,7 +35,7 @@ class _ViewScreenState extends State<ViewScreen> {
                     Text("Message: ${capsule["message"]}, Date: ${capsule["date"]}, Address: ${capsule["address"]}"),
                     ElevatedButton(
                         onPressed: () {
-                          log("UNLOCKED");
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => UnlockedCapsuleScreen(capsule: capsule)));
                         },
                         child: const Text("Unlock")
                     ),
