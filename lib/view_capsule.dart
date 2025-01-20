@@ -24,23 +24,35 @@ class _ViewScreenState extends State<ViewScreen> {
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<List<dynamic>>(
-          future: _capsules,
-          builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-            if (snapshot.hasData) {
-              List<Text> capsuleDisplayList = List.empty(growable: true);
-              for (final capsule in snapshot.data!) {
-                capsuleDisplayList.add(Text(
-                    "Message: ${capsule["message"]}, Date: ${capsule["date"]}, Address: ${capsule["address"]}"
-                ));
-              }
-
-              return Column(
-                children: capsuleDisplayList,
-              );
-            } else {
-              return Text('Fetching capsules');
+        future: _capsules,
+        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+          if (snapshot.hasData) {
+            List<Text> capsuleDisplayList = List.empty(growable: true);
+            for (final capsule in snapshot.data!) {
+              capsuleDisplayList.add(Text(
+                  "Message: ${capsule["message"]}, Date: ${capsule["date"]}, Address: ${capsule["address"]}"));
             }
-          },
+
+            return Column(
+              children: <Widget>[
+                Row(
+                  children: [
+                    ElevatedButton(
+                        onPressed:  () {},
+                        child: const Text('Ready to Unlock')
+                    ),
+                    ElevatedButton(
+                        onPressed:  () {},
+                        child: const Text('List')
+                    ),
+                  ],
+                ),
+              ],
+            );
+          } else {
+            return Text('Fetching capsules');
+          }
+        },
       ),
     );
   }
