@@ -27,7 +27,7 @@ class _ViewScreenState extends State<ViewScreen> {
         future: _capsules,
         builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData) {
-            List<Text> capsuleDisplayList = List.empty(growable: true);
+            List<Widget> capsuleDisplayList = List.empty(growable: true);
             for (final capsule in snapshot.data!) {
               capsuleDisplayList.add(Text(
                   "Message: ${capsule["message"]}, Date: ${capsule["date"]}, Address: ${capsule["address"]}"));
@@ -47,7 +47,7 @@ class _ViewScreenState extends State<ViewScreen> {
                     ),
                   ],
                 ),
-              ],
+              ] + capsuleDisplayList,
             );
           } else {
             return Text('Fetching capsules');
