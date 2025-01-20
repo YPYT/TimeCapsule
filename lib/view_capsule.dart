@@ -29,8 +29,17 @@ class _ViewScreenState extends State<ViewScreen> {
           if (snapshot.hasData) {
             List<Widget> capsuleDisplayList = List.empty(growable: true);
             for (final capsule in snapshot.data!) {
-              capsuleDisplayList.add(Text(
-                  "Message: ${capsule["message"]}, Date: ${capsule["date"]}, Address: ${capsule["address"]}"));
+              capsuleDisplayList.add(Column(
+                  children: [
+                    Text("Message: ${capsule["message"]}, Date: ${capsule["date"]}, Address: ${capsule["address"]}"),
+                    ElevatedButton(
+                        onPressed: () {
+                          log("UNLOCKED");
+                        },
+                        child: const Text("Unlock")
+                    ),
+                  ]
+              ));
             }
 
             return Column(
@@ -47,7 +56,7 @@ class _ViewScreenState extends State<ViewScreen> {
                     ),
                   ],
                 ),
-              ] + capsuleDisplayList,
+              ] + capsuleDisplayList
             );
           } else {
             return Text('Fetching capsules');
