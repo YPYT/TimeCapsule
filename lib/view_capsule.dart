@@ -13,6 +13,7 @@ class ViewScreen extends StatefulWidget {
 
 class _ViewScreenState extends State<ViewScreen> {
   late Future<List<dynamic>> _capsules;
+  int _tabIndex = 0;
 
   @override
   void initState() {
@@ -31,7 +32,14 @@ class _ViewScreenState extends State<ViewScreen> {
             List<Widget> capsuleDisplayList = List.empty(growable: true);
             var index = 0;
             for (final capsule in snapshot.data!) {
-              capsuleDisplayList.add(ViewScreenRow(capsule: capsule, index: index));
+              DateTime unlockDate = DateTime.parse(capsule["date"]);
+              if (_tabIndex == 0 && unlockDate.isBefore(DateTime.now())) {
+                capsuleDisplayList.add(
+                    ReadyToUnlockRow(capsule: capsule, index: index));
+              } else if (_tabIndex == 1 && unlockDate.isAfter(DateTime.now())) {
+                capsuleDisplayList.add(
+                    ListRow(capsule: capsule, index: index));
+              }
               index++;
             }
 
@@ -40,11 +48,19 @@ class _ViewScreenState extends State<ViewScreen> {
                 Row(
                   children: [
                     ElevatedButton(
-                        onPressed:  () {},
+                        onPressed:  () {
+                          setState(() {
+                            _tabIndex = 0;
+                          });
+                        },
                         child: const Text('Ready to Unlock')
                     ),
                     ElevatedButton(
-                        onPressed:  () {},
+                        onPressed:  () {
+                          setState(() {
+                            _tabIndex = 1;
+                          });
+                        },
                         child: const Text('List')
                     ),
                   ],
@@ -69,17 +85,17 @@ class _ViewScreenState extends State<ViewScreen> {
   }
 }
 
-class ViewScreenRow extends StatefulWidget {
+class ReadyToUnlockRow extends StatefulWidget {
   final dynamic capsule;
   final int index;
   
-  const ViewScreenRow({super.key, required this.capsule, required this.index});
+  const ReadyToUnlockRow({super.key, required this.capsule, required this.index});
 
   @override
-  State<ViewScreenRow> createState() => _ViewScreenRowState();
+  State<ReadyToUnlockRow> createState() => _ReadyToUnlockRowState();
 }
 
-class _ViewScreenRowState extends State<ViewScreenRow> {
+class _ReadyToUnlockRowState extends State<ReadyToUnlockRow> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -113,5 +129,26 @@ class _ViewScreenRowState extends State<ViewScreenRow> {
     await prefs.setString('unlocked_capsules', finalUnlockedCapsulesString);
 
     Navigator.push(context, MaterialPageRoute(builder: (context) => UnlockedCapsuleScreen(capsule: capsule)));
+  }
+}
+
+class ListRow extends StatefulWidget {
+  final dynamic capsule;
+  final int index;
+
+  const ListRow({super.key, required this.capsule, required this.index});
+
+  @override
+  State<ListRow> createState() => _ListRowState();
+}
+
+class _ListRowState extends State<ListRow> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+        children: [
+          Text("Title: ${widget.capsule["title"]}, Message: ${widget.capsule["message"]}, Date: ${widget.capsule["date"]}, Address: ${widget.capsule["address"]}"),
+        ]
+    );
   }
 }
