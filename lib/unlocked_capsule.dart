@@ -14,7 +14,6 @@ class _UnlockedCapsuleScreenState extends State<UnlockedCapsuleScreen> {
     return Center(
       child: Column(
         children: [
-          Text('----------'),
           Text('Unlocked!'),
           Text(widget.capsule["message"]),
           ElevatedButton(

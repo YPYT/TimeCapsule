@@ -4,14 +4,35 @@ import 'dart:developer';
 import 'dart:convert';
 import 'unlocked_capsule.dart';
 
-class ViewScreen extends StatefulWidget {
+class ViewScreen extends StatelessWidget {
   const ViewScreen({super.key});
 
   @override
-  State<ViewScreen> createState() => _ViewScreenState();
+  Widget build(BuildContext context) {
+    return Navigator(
+      initialRoute: "/",
+      onGenerateRoute: (RouteSettings settings) {
+        WidgetBuilder builder;
+        switch (settings.name) {
+          case "/":
+            builder = (BuildContext context) => const ViewScreenContent();
+          default:
+            throw Exception('Invalid route: ${settings.name}');
+        }
+        return MaterialPageRoute<void>(builder: builder, settings: settings);
+      },
+    );
+  }
 }
 
-class _ViewScreenState extends State<ViewScreen> {
+class ViewScreenContent extends StatefulWidget {
+  const ViewScreenContent({super.key});
+
+  @override
+  State<ViewScreenContent> createState() => _ViewScreenContentState();
+}
+
+class _ViewScreenContentState extends State<ViewScreenContent> {
   late Future<List<dynamic>> _capsules;
   int _tabIndex = 0;
 
