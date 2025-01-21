@@ -126,6 +126,7 @@ class _CreateScreenState extends State<CreateScreen> {
       "address": _address,
       "recipient": _recipient,
       "sender": 0,
+      "unlocked": 0,
     };
     capsules.add(capsuleData);
 

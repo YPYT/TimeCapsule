@@ -35,11 +35,11 @@ class _ViewScreenState extends State<ViewScreen> {
               // Only show capsules for me
               if (capsule["recipient"] == 0) {
                 DateTime unlockDate = DateTime.parse(capsule["date"]);
-                if (_tabIndex == 0 && unlockDate.isBefore(DateTime.now())) {
+                if (_tabIndex == 0 && capsule["unlocked"] == 0 && unlockDate.isBefore(DateTime.now())) {
                   capsuleDisplayList.add(
                       ReadyToUnlockRow(capsule: capsule, index: index));
                 } else
-                if (_tabIndex == 1 && unlockDate.isAfter(DateTime.now())) {
+                if (_tabIndex == 1 && capsule["unlocked"] == 0 && unlockDate.isAfter(DateTime.now())) {
                   capsuleDisplayList.add(
                       ListRow(capsule: capsule, index: index));
                 }
@@ -120,18 +120,14 @@ class _ReadyToUnlockRowState extends State<ReadyToUnlockRow> {
     // Get capsules list
     final capsulesString = prefs.getString('capsules') ?? "[]";
     final capsules = jsonDecode(capsulesString) as List<dynamic>;
-    final unlockedCapsulesString = prefs.getString('unlocked_capsules') ?? "[]";
-    final unlockedCapsules = jsonDecode(unlockedCapsulesString) as List<dynamic>;
 
+    // Set as unlocked
     var capsule = capsules[index];
-    unlockedCapsules.add(capsule);
-    capsules.removeAt(index);
+    capsule["unlocked"] = 1;
 
     // Write back to storage
     final finalCapsulesString = jsonEncode(capsules);
     await prefs.setString('capsules', finalCapsulesString);
-    final finalUnlockedCapsulesString = jsonEncode(unlockedCapsules);
-    await prefs.setString('unlocked_capsules', finalUnlockedCapsulesString);
 
     Navigator.push(context, MaterialPageRoute(builder: (context) => UnlockedCapsuleScreen(capsule: capsule)));
   }
