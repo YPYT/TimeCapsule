@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:map_location_picker/map_location_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
 
@@ -97,6 +98,9 @@ class _CreateScreenState extends State<CreateScreen> {
             },
             child: Text("Delete All Data"),
           ),
+          //MapLocationPicker(
+          //    apiKey: "AIzaSyBra6IL9KgvYrPwBLj4NCKu1Ly6OcTR1Oo",
+          //),
         ],
       )
     );
