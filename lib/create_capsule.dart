@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
 
@@ -73,6 +74,15 @@ class _CreateScreenState extends State<CreateScreen> {
               elevation: 0,
             ),
             onPressed: () {
+              _onPickImagePressed();
+            },
+            child: Text("Add Images/Videos"),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation: 0,
+            ),
+            onPressed: () {
               _onBuryPressed();
             },
             child: Text("Bury!"),
@@ -136,10 +146,17 @@ class _CreateScreenState extends State<CreateScreen> {
     await prefs.setString('capsules', finalCapsulesString);
   }
 
+  Future<void> _onPickImagePressed() async {
+    final ImagePicker picker = ImagePicker();
+    final List<XFile> medias = await picker.pickMultipleMedia();
+    for (XFile file in medias) {
+      log(file.path);
+    }
+  }
+
   // TEMP
   Future<void> _onDeleteAllDataPressed() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('capsules');
-    await prefs.remove('unlocked_capsules');
   }
 }
