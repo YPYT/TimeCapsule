@@ -32,14 +32,19 @@ class _ViewScreenState extends State<ViewScreen> {
             List<Widget> capsuleDisplayList = List.empty(growable: true);
             var index = 0;
             for (final capsule in snapshot.data!) {
-              DateTime unlockDate = DateTime.parse(capsule["date"]);
-              if (_tabIndex == 0 && unlockDate.isBefore(DateTime.now())) {
-                capsuleDisplayList.add(
-                    ReadyToUnlockRow(capsule: capsule, index: index));
-              } else if (_tabIndex == 1 && unlockDate.isAfter(DateTime.now())) {
-                capsuleDisplayList.add(
-                    ListRow(capsule: capsule, index: index));
+              // Only show capsules for me
+              if (capsule["recipient"] == 0) {
+                DateTime unlockDate = DateTime.parse(capsule["date"]);
+                if (_tabIndex == 0 && unlockDate.isBefore(DateTime.now())) {
+                  capsuleDisplayList.add(
+                      ReadyToUnlockRow(capsule: capsule, index: index));
+                } else
+                if (_tabIndex == 1 && unlockDate.isAfter(DateTime.now())) {
+                  capsuleDisplayList.add(
+                      ListRow(capsule: capsule, index: index));
+                }
               }
+
               index++;
             }
 

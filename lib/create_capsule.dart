@@ -14,6 +14,7 @@ class _CreateScreenState extends State<CreateScreen> {
   String _title = "";
   String _message = "";
   String _address = "";
+  int _recipient = 0;
   DateTime? _selectedDate;
   final TextEditingController _dateController = TextEditingController();
 
@@ -56,6 +57,15 @@ class _CreateScreenState extends State<CreateScreen> {
             ),
             onChanged: (newVal) {
               _address = newVal;
+            },
+          ),
+          TextField(
+            decoration: InputDecoration(
+              labelText: 'Recipient',
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (newVal) {
+              _recipient = int.parse(newVal);
             },
           ),
           ElevatedButton(
@@ -113,7 +123,9 @@ class _CreateScreenState extends State<CreateScreen> {
       "title": _title,
       "message": _message,
       "date": _selectedDate.toString(),
-      "address": _address
+      "address": _address,
+      "recipient": _recipient,
+      "sender": 0,
     };
     capsules.add(capsuleData);
 
