@@ -16,6 +16,7 @@ class _CreateScreenState extends State<CreateScreen> {
   String _message = "";
   String _address = "";
   int _recipient = 0;
+  List<String> _media = [];
   DateTime? _selectedDate;
   final TextEditingController _dateController = TextEditingController();
 
@@ -135,6 +136,7 @@ class _CreateScreenState extends State<CreateScreen> {
       "date": _selectedDate.toString(),
       "address": _address,
       "recipient": _recipient,
+      "media": _media,
       "sender": 0,
       "unlocked": 0,
     };
@@ -150,7 +152,7 @@ class _CreateScreenState extends State<CreateScreen> {
     final ImagePicker picker = ImagePicker();
     final List<XFile> medias = await picker.pickMultipleMedia();
     for (XFile file in medias) {
-      log(file.path);
+      _media.add(file.path);
     }
   }
 
