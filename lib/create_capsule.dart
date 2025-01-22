@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:map_location_picker/map_location_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
 
@@ -17,7 +18,7 @@ class _CreateScreenState extends State<CreateScreen> {
   String _message = "";
   String _address = "";
   int _recipient = 0;
-  List<String> _media = [];
+  List<XFile> _media = [];
   DateTime? _selectedDate;
   final TextEditingController _dateController = TextEditingController();
 
@@ -133,6 +134,15 @@ class _CreateScreenState extends State<CreateScreen> {
       return;
     }
 
+    // Save media files
+    List<String> mediaPaths = [];
+    final String docDir = (await getApplicationDocumentsDirectory()).path;
+    for (XFile mediaFile in _media) {
+      final String savedFilePath = "$docDir/${mediaFile.name}";
+      await mediaFile.saveTo(savedFilePath);
+      mediaPaths.add(savedFilePath);
+    }
+
     // Insert new capsule into list
     final capsuleData = {
       "title": _title,
@@ -140,7 +150,7 @@ class _CreateScreenState extends State<CreateScreen> {
       "date": _selectedDate.toString(),
       "address": _address,
       "recipient": _recipient,
-      "media": _media,
+      "media": mediaPaths,
       "sender": 0,
       "unlocked": 0,
       "buried_date": DateTime.now().toString(),
@@ -157,7 +167,7 @@ class _CreateScreenState extends State<CreateScreen> {
     final ImagePicker picker = ImagePicker();
     final List<XFile> medias = await picker.pickMultipleMedia();
     for (XFile file in medias) {
-      _media.add(file.path);
+      _media.add(file);
     }
   }
 
