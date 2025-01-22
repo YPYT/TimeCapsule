@@ -124,14 +124,25 @@ class ReadyToUnlockRow extends StatefulWidget {
 class _ReadyToUnlockRowState extends State<ReadyToUnlockRow> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: [
-          Text("Title: ${widget.capsule["title"]}, Message: ${widget.capsule["message"]}, Date: ${widget.capsule["date"]}, Address: ${widget.capsule["address"]}"),
-          ElevatedButton(
-              onPressed: () {_onUnlockPressed(context, widget.index);},
-              child: const Text("Unlock")
-          ),
-        ]
+    return Container(
+      height: 120,
+      width: double.infinity,
+      alignment: Alignment.center,
+      margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 0),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black, width: 1.5),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+          children: [
+            Text("Title: ${widget.capsule["title"]}, Message: ${widget.capsule["message"]}, Date: ${widget.capsule["date"]}, Address: ${widget.capsule["address"]}"),
+            ElevatedButton(
+                onPressed: () {_onUnlockPressed(context, widget.index);},
+                child: const Text("Unlock")
+            ),
+          ]
+      ),
     );
   }
 
@@ -172,7 +183,7 @@ class _ListRowState extends State<ListRow> {
       width: double.infinity,
       alignment: Alignment.center,
       margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 0),
-      padding: const EdgeInsets.all(30),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 1.5),
         borderRadius: BorderRadius.circular(10),
