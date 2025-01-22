@@ -42,7 +42,7 @@ class _ListRowState extends State<ListRow> {
             Row(
               spacing: 20,
               children: [
-                Text("FROM ME"),
+                Text("Myself"),
                 Text("Buried: ${buriedDate.day}/${buriedDate.month}/${buriedDate.year}"),
                 ElevatedButton(
                   onPressed: () {},

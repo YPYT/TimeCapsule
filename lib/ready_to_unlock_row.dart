@@ -16,6 +16,8 @@ class ReadyToUnlockRow extends StatefulWidget {
 class _ReadyToUnlockRowState extends State<ReadyToUnlockRow> {
   @override
   Widget build(BuildContext context) {
+    DateTime buriedDate = DateTime.parse(widget.capsule["buried_date"]);
+
     return Container(
       height: 130,
       width: double.infinity,
@@ -26,14 +28,24 @@ class _ReadyToUnlockRowState extends State<ReadyToUnlockRow> {
         border: Border.all(color: Colors.black, width: 1.5),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(
-          children: [
-            Text("Title: ${widget.capsule["title"]}, Message: ${widget.capsule["message"]}, Date: ${widget.capsule["date"]}, Address: ${widget.capsule["address"]}"),
-            ElevatedButton(
-                onPressed: () {_onUnlockPressed(context, widget.index);},
-                child: const Text("Unlock")
-            ),
-          ]
+      child: Row(
+        spacing: 40,
+        children: [
+          Image(
+            image: AssetImage("assets/rabbit.png"),
+          ),
+          Column(
+              children: [
+                Text("Myself"),
+                Text("Buried: ${buriedDate.day}/${buriedDate.month}/${buriedDate.year}"),
+                ElevatedButton.icon(
+                  onPressed: () {_onUnlockPressed(context, widget.index);},
+                  label: const Text("Unlock"),
+                  icon: const Icon(Icons.key),
+                ),
+              ]
+          ),
+        ],
       ),
     );
   }
