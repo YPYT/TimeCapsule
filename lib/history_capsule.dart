@@ -4,14 +4,35 @@ import 'dart:developer';
 import 'dart:convert';
 import 'unlocked_capsule.dart';
 
-class HistoryScreen extends StatefulWidget {
+class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
 
   @override
-  State<HistoryScreen> createState() => _HistoryScreenState();
+  Widget build(BuildContext context) {
+    return Navigator(
+      initialRoute: "/",
+      onGenerateRoute: (RouteSettings settings) {
+        WidgetBuilder builder;
+        switch (settings.name) {
+          case "/":
+            builder = (BuildContext context) => const HistoryScreenContent();
+          default:
+            throw Exception('Invalid route: ${settings.name}');
+        }
+        return MaterialPageRoute<void>(builder: builder, settings: settings);
+      },
+    );
+  }
 }
 
-class _HistoryScreenState extends State<HistoryScreen> {
+class HistoryScreenContent extends StatefulWidget {
+  const HistoryScreenContent({super.key});
+
+  @override
+  State<HistoryScreenContent> createState() => _HistoryScreenContentState();
+}
+
+class _HistoryScreenContentState extends State<HistoryScreenContent> {
   late Future<List<dynamic>> _capsules;
   int _tabIndex = 0;
 
@@ -121,6 +142,10 @@ class _UnlockedRowState extends State<UnlockedRow> {
       child: Column(
           children: [
             Text("Title: ${widget.capsule["title"]}, Message: ${widget.capsule["message"]}, Date: ${widget.capsule["date"]}, Address: ${widget.capsule["address"]}"),
+            ElevatedButton(
+                onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => UnlockedCapsuleScreen(capsule: widget.capsule))); },
+                child: const Text("View")
+            ),
           ]
       ),
     );
@@ -153,6 +178,10 @@ class _BuriedRowState extends State<BuriedRow> {
       child: Column(
           children: [
             Text("Title: ${widget.capsule["title"]}, Message: ${widget.capsule["message"]}, Date: ${widget.capsule["date"]}, Address: ${widget.capsule["address"]}"),
+            ElevatedButton(
+                onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => UnlockedCapsuleScreen(capsule: widget.capsule))); },
+                child: const Text("View")
+            ),
           ]
       ),
     );
