@@ -60,6 +60,7 @@ class _ReadyToUnlockRowState extends State<ReadyToUnlockRow> {
     // Set as unlocked
     var capsule = capsules[index];
     capsule["unlocked"] = 1;
+    capsule["unlocked_date"] = DateTime.now().toString();
 
     // Write back to storage
     final finalCapsulesString = jsonEncode(capsules);
