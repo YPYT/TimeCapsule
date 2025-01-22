@@ -29,7 +29,8 @@ class _UnlockedCapsuleScreenState extends State<UnlockedCapsuleScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("Go Back"))
+            child: Text("Go Back")
+          ),
         ],
       )
     );

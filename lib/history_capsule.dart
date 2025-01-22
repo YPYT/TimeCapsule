@@ -134,7 +134,7 @@ class _UnlockedRowState extends State<UnlockedRow> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => UnlockedCapsuleScreen(capsule: widget.capsule)));
       },
       child: Container(
-        height: 120,
+        height: 130,
         width: double.infinity,
         alignment: Alignment.center,
         margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 0),
@@ -171,7 +171,7 @@ class _BuriedRowState extends State<BuriedRow> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => UnlockedCapsuleScreen(capsule: widget.capsule)));
       },
       child: Container(
-        height: 120,
+        height: 130,
         width: double.infinity,
         alignment: Alignment.center,
         margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 0),
