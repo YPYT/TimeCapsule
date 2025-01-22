@@ -143,6 +143,7 @@ class _CreateScreenState extends State<CreateScreen> {
       "media": _media,
       "sender": 0,
       "unlocked": 0,
+      "buried_date": DateTime.now().toString(),
     };
     capsules.add(capsuleData);
 

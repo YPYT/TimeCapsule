@@ -192,6 +192,7 @@ class _ListRowState extends State<ListRow> {
     LocalDate unlockDate = LocalDate.dateTime(DateTime.parse(widget.capsule["date"]));
     Period dateDiff = unlockDate.periodSince(LocalDate.today());
     String dateDiffString = "years: ${dateDiff.years}; months: ${dateDiff.months}; days: ${dateDiff.days}";
+    DateTime buriedDate = DateTime.parse(widget.capsule["buried_date"]);
 
     return Container(
       height: 130,
@@ -217,7 +218,7 @@ class _ListRowState extends State<ListRow> {
             spacing: 20,
             children: [
               Text("FROM ME"),
-              Text("BURIED TODAY"),
+              Text("Buried: ${buriedDate.day}/${buriedDate.month}/${buriedDate.year}"),
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
