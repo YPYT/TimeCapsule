@@ -72,22 +72,32 @@ class _ViewScreenContentState extends State<ViewScreenContent> {
             return Column(
               children: <Widget>[
                 Row(
+                  spacing: 40,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     ElevatedButton(
-                        onPressed:  () {
-                          setState(() {
-                            _tabIndex = 0;
-                          });
-                        },
-                        child: const Text('Ready to Unlock')
+                      onPressed:  () {
+                        setState(() {
+                          _tabIndex = 0;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: Size(160, 30),
+                        //shape:
+                      ),
+                      child: const Text('Ready to Unlock')
                     ),
                     ElevatedButton(
-                        onPressed:  () {
-                          setState(() {
-                            _tabIndex = 1;
-                          });
-                        },
-                        child: const Text('List')
+                      onPressed:  () {
+                        setState(() {
+                          _tabIndex = 1;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: Size(160, 30),
+                        //shape:
+                      ),
+                      child: const Text('List')
                     ),
                   ],
                 ),

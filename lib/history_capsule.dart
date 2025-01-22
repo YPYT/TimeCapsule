@@ -45,22 +45,32 @@ class _HistoryScreenState extends State<HistoryScreen> {
             return Column(
                 children: <Widget>[
                   Row(
+                    spacing: 40,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       ElevatedButton(
-                          onPressed:  () {
-                            setState(() {
-                              _tabIndex = 0;
-                            });
-                          },
-                          child: const Text('Unlocked')
+                        onPressed:  () {
+                          setState(() {
+                            _tabIndex = 0;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: Size(160, 30),
+                          //shape:
+                        ),
+                        child: const Text('Unlocked'),
                       ),
                       ElevatedButton(
-                          onPressed:  () {
-                            setState(() {
-                              _tabIndex = 1;
-                            });
-                          },
-                          child: const Text('You Buried')
+                        onPressed:  () {
+                          setState(() {
+                            _tabIndex = 1;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: Size(160, 30),
+                          //shape:
+                        ),
+                        child: const Text('You Buried')
                       ),
                     ],
                   ),
