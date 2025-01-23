@@ -171,11 +171,9 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
                   padding: const EdgeInsets.only(right: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      log("TEST");
                       Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenTwo()));
                     },
                     child: Text("Next"),
-
                   ),
                 )
               ],

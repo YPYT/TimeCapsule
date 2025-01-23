@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'create_screen_3.dart';
 
 class CreateScreenTwo extends StatefulWidget {
   const CreateScreenTwo({super.key});
@@ -59,7 +60,36 @@ class _CreateScreenTwoState extends State<CreateScreenTwo> {
                 ),
               ],
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 50),
+            Container(
+              height: 500,
+              width: double.infinity,
+              margin: const EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 0),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(color: Color(0xFFD9D9D9), width: 1.5),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              spacing: 170,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Back"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenThree()));
+                  },
+                  child: Text("Next"),
+                ),
+              ]
+            )
           ],
         )
     );
