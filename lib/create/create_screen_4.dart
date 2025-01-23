@@ -4,6 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
 import 'package:image_picker/image_picker.dart';
+import 'buried_capsule.dart';
 
 class CreateScreenFour extends StatefulWidget {
   const CreateScreenFour({super.key});
@@ -154,7 +155,7 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      _onBuryPressed();
+                      _onBuryPressed(context);
                     },
                     child: Text("Bury!"),
                   ),
@@ -185,7 +186,7 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
     );
   }
 
-  Future<void> _onBuryPressed() async {
+  Future<void> _onBuryPressed(context) async {
     final prefs = await SharedPreferences.getInstance();
 /*
     // Get capsules list
@@ -204,5 +205,6 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
       await mediaFile.saveTo(savedFilePath);
       mediaPaths.add(savedFilePath);
     }*/
+    Navigator.push(context, MaterialPageRoute(builder: (context) => BuriedCapsuleScreen()));
   }
 }
