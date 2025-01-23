@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'create_capsule.dart';
+import 'create/create_capsule.dart';
 import 'view_capsule.dart';
 import 'history_capsule.dart';
 
