@@ -27,81 +27,156 @@ class _CreateScreenState extends State<CreateScreen> {
     return Center(
       child: Column(
         children: [
-          TextField(
-            controller: _dateController,
-            decoration: InputDecoration(
-              labelText: 'DATE',
-              filled: true,
-              prefixIcon: Icon(Icons.calendar_today),
-            ),
-            readOnly: true,
-            onTap: (){
-              _selectDate(context);
-            },
+          Row(
+            spacing: 5,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed:  () {},
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(15),
+                  iconSize: 35,
+                ),
+                child: Icon(Icons.window, color: Colors.black),
+              ),
+              Icon(Icons.arrow_right_alt, size: 30),
+              ElevatedButton(
+                onPressed:  () {},
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(15),
+                  iconSize: 35,
+                ),
+                child: Icon(Icons.location_on, color: Colors.black),
+              ),
+              Icon(Icons.arrow_right_alt, size: 30),
+              ElevatedButton(
+                onPressed:  () {},
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(15),
+                  iconSize: 35,
+                ),
+                child: Icon(Icons.outgoing_mail, color: Colors.black),
+              ),
+              Icon(Icons.arrow_right_alt, size: 30),
+              ElevatedButton(
+                onPressed:  () {},
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(15),
+                  iconSize: 35,
+                ),
+                child: Icon(Icons.mobile_friendly, color: Colors.black),
+              ),
+            ],
           ),
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Title',
+          SizedBox(height: 15),
+          Container(
+            height: 150,
+            width: double.infinity,
+            alignment: Alignment.center,
+            margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 0),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              gradient: LinearGradient(
+                  colors: [
+                    Color(0xFFFFAD49),
+                    Color(0xffffc890),
+                  ]
+              )
             ),
-            onChanged: (newVal) {
-              _title = newVal;
-            },
-          ),
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Message',
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(Icons.image),
+                  Text("Select photo/video")
+                ],
+              ),
             ),
-            onChanged: (newVal) {
-              _message = newVal;
-            },
           ),
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Address',
-            ),
-            onChanged: (newVal) {
-              _address = newVal;
-            },
+          Container(
+            height: 150,
+            width: double.infinity,
+            decoration: BoxDecoration(color: Colors.white),
           ),
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Recipient',
-            ),
-            keyboardType: TextInputType.number,
-            onChanged: (newVal) {
-              _recipient = int.parse(newVal);
-            },
+          Row(
+            spacing: 22,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 150,
+                width: 170,
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(left: 20, right: 0, top: 20, bottom: 0),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color(0xFFFFAD49),
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.redeem),
+                      Text("Select your capsule")
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                height: 150,
+                width: 170,
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(left: 0, right: 20, top: 20, bottom: 0),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color(0xffffc890),
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.mail),
+                      Text("Write message"),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-            ),
-            onPressed: () {
-              _onPickImagePressed();
-            },
-            child: Text("Add Images/Videos"),
+          SizedBox(height: 30),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(width: 100),
+              Column(
+                children: [
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.find_in_page, size: 50)
+                  ),
+                  Text("Preview")
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Next"),
+
+                ),
+              )
+            ],
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-            ),
-            onPressed: () {
-              _onBuryPressed();
-            },
-            child: Text("Bury!"),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-            ),
-            onPressed: () {
-              _onDeleteAllDataPressed();
-            },
-            child: Text("Delete All Data"),
-          ),
-          //MapLocationPicker(
-          //    apiKey: "AIzaSyBra6IL9KgvYrPwBLj4NCKu1Ly6OcTR1Oo",
-          //),
+
         ],
       )
     );
