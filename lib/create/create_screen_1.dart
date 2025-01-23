@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
 import 'create_screen_2.dart';
+import 'preview.dart';
 
 class CreateScreenOne extends StatefulWidget {
   const CreateScreenOne({super.key});
@@ -161,7 +162,9 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
                 Column(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => PreviewScreen()));
+                        },
                         icon: const Icon(Icons.find_in_page, size: 50)
                     ),
                     Text("Preview")
