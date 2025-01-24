@@ -100,7 +100,7 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
                 height: 150,
                 width: double.infinity,
                 alignment: Alignment.center,
-                margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 0),
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -116,15 +116,34 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.image),
-                      Text("Select photo/video")
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12, top: 12),
+                        child: Icon(Icons.image, size: 55, color: Colors.white),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 18, top: 20),
+                        child: Text("Select photo/video", style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                        )),
+                      )
                     ],
                   ),
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 25),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text("Selected Items", style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ))
+              ),
+            ),
             Container(
-              height: 150,
+              height: 120,
               margin: const EdgeInsets.only(left: 15, right: 15),
               width: double.infinity,
               decoration: BoxDecoration(color: Colors.white),
@@ -155,8 +174,18 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.redeem),
-                          Text("Select your capsule")
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8, left: 5),
+                            child: Icon(Icons.redeem, size: 45, color: Colors.white),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40, left: 5),
+                            child: Text("Select capsule", style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold
+                            )),
+                          )
                         ],
                       ),
                     ),
@@ -181,8 +210,18 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.mail),
-                          Text("Write message"),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8, left: 5),
+                            child: Icon(Icons.mail, size: 45, color: Colors.white),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 40, left: 5),
+                            child: Text("Write message", style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold
+                            )),
+                          ),
                         ],
                       ),
                     ),
@@ -194,7 +233,7 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(width: 100),
+                SizedBox(width: 122),
                 Column(
                   children: [
                     IconButton(
@@ -212,6 +251,10 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenTwo(capsule: capsule)));
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFE4EFCA),
+                      minimumSize: const Size(100, 40),
+                    ),
                     child: Text("Next"),
                   ),
                 )
