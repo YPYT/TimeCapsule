@@ -26,16 +26,22 @@ class _UnlockedCapsuleScreenState extends State<UnlockedCapsuleScreen> {
 
     return Column(
       children: [
-        ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("Go Back")
+        Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_ios, size: 25)
+            ),
+          ),
         ),
         Container(
           height: 650,
           width: double.infinity,
-          margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 0),
+          margin: const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 0),
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 1.5),
