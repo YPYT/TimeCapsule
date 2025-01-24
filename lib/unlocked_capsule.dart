@@ -41,7 +41,7 @@ class _UnlockedCapsuleScreenState extends State<UnlockedCapsuleScreen> {
         Container(
           height: 650,
           width: double.infinity,
-          margin: const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 0),
+          margin: const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 0),
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 1.5),
