@@ -6,6 +6,7 @@ import 'dart:developer';
 import 'package:image_picker/image_picker.dart';
 import 'buried_capsule.dart';
 import 'dart:convert';
+import '../names.dart';
 
 class CreateScreenFour extends StatefulWidget {
   final Map<String, dynamic> capsule;
@@ -130,7 +131,8 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Emily"),
+                        Image(image: AssetImage("assets/friend${widget.capsule["recipient"]}.png")),
+                        Text(getName(widget.capsule["recipient"])),
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.group_add, size: 40)

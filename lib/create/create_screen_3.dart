@@ -15,18 +15,104 @@ class _CreateScreenThreeState extends State<CreateScreenThree> {
 
   @override
   Widget build(BuildContext context) {
-    widget.capsule["recipient"] = 0;
-
     Widget personPicker = SizedBox(height: 30);
     if (_tabIndex == 1) {
+      List<Widget> personPickerTickWidgets = [
+        SizedBox(),
+        SizedBox(),
+        SizedBox(),
+        SizedBox(),
+        SizedBox(),
+        SizedBox(),
+        SizedBox(),
+        SizedBox(),
+      ];
+      if (widget.capsule["recipient"] != 0) {
+        personPickerTickWidgets[widget.capsule["recipient"]-1] = Container(
+            padding: const EdgeInsets.only(left: 35, top: 35),
+            child: Icon(Icons.check_circle, color: Color(0xFF0066FF))
+        );
+      }
+
       personPicker = Container(
         height: 200,
         width: double.infinity,
         margin: const EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 0),
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(30),
         decoration: BoxDecoration(
           border: Border.all(color: Color(0xFFD9D9D9), width: 1.5),
           borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                    onTap: () {setState(() {widget.capsule["recipient"] = 1;});},
+                    child: Stack(children: [
+                      Image(image: AssetImage("assets/friend1.png")),
+                      personPickerTickWidgets[0]
+                    ])
+                ),
+                GestureDetector(
+                    onTap: () {setState(() {widget.capsule["recipient"] = 2;});},
+                    child: Stack(children: [
+                      Image(image: AssetImage("assets/friend2.png")),
+                      personPickerTickWidgets[1]
+                    ])
+                ),
+                GestureDetector(
+                    onTap: () {setState(() {widget.capsule["recipient"] = 3;});},
+                    child: Stack(children: [
+                      Image(image: AssetImage("assets/friend3.png")),
+                      personPickerTickWidgets[2]
+                    ])
+                ),
+                GestureDetector(
+                    onTap: () {setState(() {widget.capsule["recipient"] = 4;});},
+                    child: Stack(children: [
+                      Image(image: AssetImage("assets/friend4.png")),
+                      personPickerTickWidgets[3]
+                    ])
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                    onTap: () {setState(() {widget.capsule["recipient"] = 5;});},
+                    child: Stack(children: [
+                      Image(image: AssetImage("assets/friend5.png")),
+                      personPickerTickWidgets[4]
+                    ])
+                ),
+                GestureDetector(
+                    onTap: () {setState(() {widget.capsule["recipient"] = 6;});},
+                    child: Stack(children: [
+                      Image(image: AssetImage("assets/friend6.png")),
+                      personPickerTickWidgets[5]
+                    ])
+                ),
+                GestureDetector(
+                    onTap: () {setState(() {widget.capsule["recipient"] = 7;});},
+                    child: Stack(children: [
+                      Image(image: AssetImage("assets/friend7.png")),
+                      personPickerTickWidgets[6]
+                    ])
+                ),
+                GestureDetector(
+                    onTap: () {setState(() {widget.capsule["recipient"] = 8;});},
+                    child: Stack(children: [
+                      Image(image: AssetImage("assets/friend8.png")),
+                      personPickerTickWidgets[7]
+                    ])
+                ),
+              ],
+            ),
+          ],
         ),
       );
     }
@@ -88,6 +174,7 @@ class _CreateScreenThreeState extends State<CreateScreenThree> {
                     onPressed:  () {
                       setState(() {
                         _tabIndex = 0;
+                        widget.capsule["recipient"] = 0;
                       });
                     },
                     style: ElevatedButton.styleFrom(
@@ -143,7 +230,9 @@ class _CreateScreenThreeState extends State<CreateScreenThree> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenFour(capsule: widget.capsule)));
+                      if (widget.capsule.containsKey("date")) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenFour(capsule: widget.capsule)));
+                      }
                     },
                     child: Text("Next"),
                   ),

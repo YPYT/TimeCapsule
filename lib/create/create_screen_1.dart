@@ -20,6 +20,7 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
     "message": "",
     "capsule_image": "rabbit.png",
     "tmp_media": [],
+    "recipient": 0
   };
 
   @override
