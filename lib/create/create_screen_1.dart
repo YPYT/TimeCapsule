@@ -27,17 +27,20 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
   @override
   Widget build(BuildContext context) {
     List<Image> mediaChildren = [];
-    for (XFile mediaFile in capsule["tmp_media"]) {
-      String mediaPath = mediaFile.path;
-      log(mediaPath);
-      if (mediaPath.endsWith(".jpg")) {
-        mediaChildren.add(Image(
-          image: FileImage(File(mediaPath)),
-          width: 80,
-          height: 80,
-        ));
+    if (capsule.containsKey("tmp_media")) {
+      for (XFile mediaFile in capsule["tmp_media"]) {
+        String mediaPath = mediaFile.path;
+        log(mediaPath);
+        if (mediaPath.endsWith(".jpg")) {
+          mediaChildren.add(Image(
+            image: FileImage(File(mediaPath)),
+            width: 80,
+            height: 80,
+          ));
+        }
       }
     }
+
 
     return Center(
         child: Column(

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:time_machine/time_machine.dart';
-import 'create_screen_3.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer';
-import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class BuriedCapsuleScreen extends StatefulWidget {
   final Map<String, dynamic> capsule;
@@ -22,20 +18,39 @@ class _BuriedCapsuleScreenState extends State<BuriedCapsuleScreen> {
     LocalDate localUnlockDate = LocalDate.dateTime(unlockDate);
     DateTime buriedDate = DateTime.parse(widget.capsule["buried_date"]);
     Period dateDiff = localUnlockDate.periodSince(LocalDate.today());
-    String dateDiffString = "years: ${dateDiff.years}; months: ${dateDiff.months}; days: ${dateDiff.days}";
+
+    NumberFormat formatter = new NumberFormat("00");
 
     return Center(
         child: Column(
           children: [
-            Text("Buried your time capsule!"),
-            Text("Buried on ${buriedDate.day}/${buriedDate.month}/${buriedDate.year}"),
+            Text("Buried your time capsule!", style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+            )),
+            SizedBox(height: 10),
+            Text(
+              "Buried on ${buriedDate.day}/${buriedDate.month}/${buriedDate.year}",
+              style: TextStyle(
+                fontSize: 20,
+              )
+            ),
+            SizedBox(height: 20),
             Row(
+              spacing: 30,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Column(
                   children: [
-                    Text("For"),
-                    Text("Emily")
+                    Text("For", style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold
+                    )),
+                    Image(
+                      image: AssetImage("assets/friend${widget.capsule["recipient"]}.png"),
+                      width: 60,
+                      height: 60,
+                    ),
                   ]
                 ),
                 Image(
@@ -43,17 +58,55 @@ class _BuriedCapsuleScreenState extends State<BuriedCapsuleScreen> {
                 ),
               ],
             ),
-            Container(
+            Image(
+              image: AssetImage("assets/map_big.png"),
               height: 250,
               width: 200,
-              decoration: BoxDecoration(
-                border: Border.all(color: Color(0xFFD9D9D9), width: 1.5),
-                borderRadius: BorderRadius.circular(10),
-              ),
             ),
-            Text(widget.capsule["address"]),
-            Text(dateDiffString),
-            Text("Unlock: ${unlockDate.day}/${unlockDate.month}/${unlockDate.year}"),
+            Padding(
+              padding: const EdgeInsets.only(left: 100, right: 100),
+              child: Text(widget.capsule["address"]),
+            ),
+            SizedBox(height: 30),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 20,
+              children: [
+                Column(
+                  children: [
+                    Text(formatter.format(dateDiff.years), style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold
+                    )),
+                    Text("Years")
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(formatter.format(dateDiff.months), style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold
+                    )),
+                    Text("Months")
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(formatter.format(dateDiff.days), style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold
+                    )),
+                    Text("Days")
+                  ],
+                )
+              ],
+            ),
+            SizedBox(height: 40),
+            Text("Unlock: ${unlockDate.day}/${unlockDate.month}/${unlockDate.year}",
+              style: TextStyle(
+                fontSize: 20,
+              )
+            ),
           ],
         )
     );
