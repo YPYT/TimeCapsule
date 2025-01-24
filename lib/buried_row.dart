@@ -37,7 +37,7 @@ class _BuriedRowState extends State<BuriedRow> {
             Column(
               children: [
                 Image(
-                  image: AssetImage("assets/rabbit.png"),
+                  image: AssetImage("assets/${widget.capsule["capsule_image"]}"),
                 ),
                 Text("Myself"),
               ],

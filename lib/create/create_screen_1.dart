@@ -5,6 +5,7 @@ import 'preview.dart';
 import 'message_input.dart';
 import 'dart:io';
 import 'dart:developer';
+import 'select_capsule.dart';
 
 class CreateScreenOne extends StatefulWidget {
   const CreateScreenOne({super.key});
@@ -129,24 +130,29 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
               spacing: 22,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  height: 150,
-                  width: 170,
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(left: 20, right: 0, top: 20, bottom: 0),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFFFFAD49),
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(Icons.redeem),
-                        Text("Select your capsule")
-                      ],
+                GestureDetector(
+                  onTap: () {
+                    _goToSelectCapsuleScreen();
+                  },
+                  child: Container(
+                    height: 150,
+                    width: 170,
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left: 20, right: 0, top: 20, bottom: 0),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFFFFAD49),
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.redeem),
+                          Text("Select your capsule")
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -219,6 +225,14 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
     );
     capsule["title"] = result[0];
     capsule["message"] = result[1];
+  }
+
+  Future<void> _goToSelectCapsuleScreen() async {
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SelectCapsuleScreen())
+    );
+    capsule["capsule_image"] = result;
   }
 
   Future<void> _onPickImagePressed() async {

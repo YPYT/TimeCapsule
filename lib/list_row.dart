@@ -34,7 +34,7 @@ class _ListRowState extends State<ListRow> {
             Row(
               children: [
                 Image(
-                  image: AssetImage("assets/rabbit.png"),
+                  image: AssetImage("assets/${widget.capsule["capsule_image"]}"),
                 ),
                 Text(dateDiffString),
               ],

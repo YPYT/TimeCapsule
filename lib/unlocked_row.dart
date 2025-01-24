@@ -37,7 +37,7 @@ class _UnlockedRowState extends State<UnlockedRow> {
             Column(
               children: [
                 Image(
-                  image: AssetImage("assets/rabbit.png"),
+                  image: AssetImage("assets/${widget.capsule["capsule_image"]}"),
                 ),
                 Text("Myself"),
               ],

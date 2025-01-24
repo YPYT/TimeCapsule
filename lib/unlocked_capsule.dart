@@ -48,7 +48,7 @@ class _UnlockedCapsuleScreenState extends State<UnlockedCapsuleScreen> {
                 spacing: 20,
                 children: [
                   Image(
-                    image: AssetImage("assets/rabbit.png"),
+                    image: AssetImage("assets/${widget.capsule["capsule_image"]}"),
                   ),
                   Image(
                     image: AssetImage("assets/smiley.png"),

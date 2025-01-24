@@ -32,7 +32,7 @@ class _ReadyToUnlockRowState extends State<ReadyToUnlockRow> {
         spacing: 40,
         children: [
           Image(
-            image: AssetImage("assets/rabbit.png"),
+            image: AssetImage("assets/${widget.capsule["capsule_image"]}"),
           ),
           Column(
               children: [
