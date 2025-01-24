@@ -75,20 +75,32 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
             ),
             SizedBox(height: 50),
             Container(
-              height: 500,
+              height: 550,
               width: double.infinity,
               margin: const EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 0),
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 border: Border.all(color: Color(0xFFD9D9D9), width: 1.5),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
                 children: [
-                  Text("Time Capsule"),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Time Capsule",
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
                   Container(
                     height: 70,
                     width: double.infinity,
+                    margin: EdgeInsets.only(bottom: 15),
+                    padding: EdgeInsets.only(left: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Color(0xFFFEF7A0)
@@ -99,15 +111,27 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                         Text(widget.capsule["title"]),
                         IconButton(
                             onPressed: () {},
-                            icon: const Icon(Icons.find_in_page, size: 40)
+                            icon: const Icon(Icons.find_in_page, size: 30, color: Color(0xFF797979))
                         ),
                       ],
                     ),
                   ),
-                  Text("Location"),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Location",
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
                   Container(
                     height: 70,
                     width: double.infinity,
+                    margin: EdgeInsets.only(bottom: 15),
+                    padding: EdgeInsets.only(left: 20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Color(0xFFFEF7A0)
@@ -116,25 +140,37 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: 280,
+                          width: 260,
                           child: Text(
                               widget.capsule["address"],
-                              softWrap: false,
+                              softWrap: true,
                               overflow: TextOverflow.fade,
-                              maxLines: 1
+                              maxLines: 2
                           )
                         ),
                         IconButton(
                             onPressed: () {},
-                            icon: const Icon(Icons.map, size: 40)
+                            icon: const Icon(Icons.map, size: 30, color: Color(0xFF797979))
                         ),
                       ],
                     ),
                   ),
-                  Text("Who"),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Who",
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
                   Container(
                     height: 70,
                     width: double.infinity,
+                    margin: EdgeInsets.only(bottom: 15),
+                    padding: EdgeInsets.only(left: 20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Color(0xFFFEF7A0)
@@ -142,19 +178,40 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image(image: AssetImage("assets/friend${widget.capsule["recipient"]}.png")),
-                        Text(getName(widget.capsule["recipient"])),
+                        Row(
+                          spacing: 20,
+                          children: [
+                            Image(
+                              image: AssetImage("assets/friend${widget.capsule["recipient"]}.png"),
+                              width: 50,
+                              height: 50,
+                            ),
+                            Text(getName(widget.capsule["recipient"])),
+                          ]
+                        ),
                         IconButton(
                             onPressed: () {},
-                            icon: const Icon(Icons.group_add, size: 40)
+                            icon: const Icon(Icons.group_add, size: 30, color: Color(0xFF797979))
                         ),
                       ],
                     ),
                   ),
-                  Text("When to unlock"),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Unlock Date",
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
                   Container(
                     height: 70,
                     width: double.infinity,
+                    margin: EdgeInsets.only(bottom: 25),
+                    padding: EdgeInsets.only(left: 20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Color(0xFFFEF7A0)
@@ -165,7 +222,7 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                         Text("${unlockedDate.day}/${unlockedDate.month}/${unlockedDate.year}"),
                         IconButton(
                             onPressed: () {},
-                            icon: const Icon(Icons.calendar_today, size: 40)
+                            icon: const Icon(Icons.calendar_today, size: 30, color: Color(0xFF797979))
                         ),
                       ],
                     ),
@@ -174,12 +231,31 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                     onPressed: () {
                       _onBuryPressed(context, widget.capsule);
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFF7D38E),
+                      minimumSize: const Size(150, 40),
+                    ),
                     child: Text("Bury!"),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFD9D9D9),
+                  ),
+                  child: Text("Back"),
+                ),
+              ),
+            ),
           ],
         )
     );

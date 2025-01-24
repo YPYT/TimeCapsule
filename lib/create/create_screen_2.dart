@@ -97,6 +97,9 @@ class _CreateScreenTwoState extends State<CreateScreenTwo> {
               onPressed: () {
                 Navigator.pop(context);
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFD9D9D9),
+              ),
               child: Text("Back"),
             ),
           ],

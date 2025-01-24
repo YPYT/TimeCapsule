@@ -117,6 +117,18 @@ class _CreateScreenThreeState extends State<CreateScreenThree> {
       );
     }
 
+    Color tabOneColour = Color(0xFFD9D9D9);
+    Color tabTwoColour = Color(0xFFD9D9D9);
+    Color tabOneFGColour = Colors.black;
+    Color tabTwoFGColour = Colors.black;
+    if (_tabIndex == 0) {
+      tabOneColour = Color(0xFF797979);
+      tabOneFGColour = Colors.white;
+    } else {
+      tabTwoColour = Color(0xFF797979);
+      tabTwoFGColour = Colors.white;
+    }
+
     return Center(
         child: Column(
           children: [
@@ -183,7 +195,8 @@ class _CreateScreenThreeState extends State<CreateScreenThree> {
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(160, 30),
-                      //shape:
+                      backgroundColor: tabOneColour,
+                      foregroundColor: tabOneFGColour
                     ),
                     child: const Text('For myself')
                 ),
@@ -195,7 +208,8 @@ class _CreateScreenThreeState extends State<CreateScreenThree> {
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(160, 30),
-                      //shape:
+                      backgroundColor: tabTwoColour,
+                      foregroundColor: tabTwoFGColour
                     ),
                     child: const Text("With friends")
                 ),
@@ -203,7 +217,7 @@ class _CreateScreenThreeState extends State<CreateScreenThree> {
             ),
             SizedBox(height: 20),
             personPicker,
-            SizedBox(height: 20),
+            SizedBox(height: 80),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: TextField(
@@ -222,25 +236,41 @@ class _CreateScreenThreeState extends State<CreateScreenThree> {
               ),
             ),
             SizedBox(height: 20),
-            Row(
-                spacing: 170,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("Back"),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: Row(
+                      spacing: 140,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFFD9D9D9),
+                            minimumSize: const Size(100, 40),
+                          ),
+                          child: Text("Back"),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            if (widget.capsule.containsKey("date")) {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenFour(capsule: widget.capsule)));
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFFE4EFCA),
+                            minimumSize: const Size(100, 40),
+                          ),
+                          child: Text("Next"),
+                        ),
+                      ]
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (widget.capsule.containsKey("date")) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenFour(capsule: widget.capsule)));
-                      }
-                    },
-                    child: Text("Next"),
-                  ),
-                ]
+                ),
+              ),
             )
           ],
         )
