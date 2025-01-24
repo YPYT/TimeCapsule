@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'create_screen_3.dart';
 
 class CreateScreenTwo extends StatefulWidget {
-  const CreateScreenTwo({super.key});
+  final Map<String, dynamic> capsule;
+  const CreateScreenTwo({super.key, required this.capsule});
 
   @override
   State<CreateScreenTwo> createState() => _CreateScreenTwoState();
@@ -12,6 +13,8 @@ class _CreateScreenTwoState extends State<CreateScreenTwo> {
 
   @override
   Widget build(BuildContext context) {
+    widget.capsule["address"] = "My capsule's address";
+
     return Center(
         child: Column(
           children: [
@@ -84,7 +87,7 @@ class _CreateScreenTwoState extends State<CreateScreenTwo> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenThree()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenThree(capsule: widget.capsule)));
                   },
                   child: Text("Next"),
                 ),

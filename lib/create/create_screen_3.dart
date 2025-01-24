@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'create_screen_4.dart';
 
 class CreateScreenThree extends StatefulWidget {
-  const CreateScreenThree({super.key});
+  final Map<String, dynamic> capsule;
+  const CreateScreenThree({super.key, required this.capsule});
 
   @override
   State<CreateScreenThree> createState() => _CreateScreenThreeState();
@@ -14,6 +15,8 @@ class _CreateScreenThreeState extends State<CreateScreenThree> {
 
   @override
   Widget build(BuildContext context) {
+    widget.capsule["recipient"] = 0;
+
     Widget personPicker = SizedBox(height: 30);
     if (_tabIndex == 1) {
       personPicker = Container(
@@ -140,7 +143,7 @@ class _CreateScreenThreeState extends State<CreateScreenThree> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenFour()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenFour(capsule: widget.capsule)));
                     },
                     child: Text("Next"),
                   ),
@@ -160,7 +163,7 @@ class _CreateScreenThreeState extends State<CreateScreenThree> {
     );
 
     if (picked != null) {
-      //_selectedDate = picked;
+      widget.capsule["date"] = picked.toString();
       setState(() {
         _dateController.text = "${picked.day}/${picked.month}/${picked.year}";
       });

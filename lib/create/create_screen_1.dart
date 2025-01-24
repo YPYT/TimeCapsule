@@ -23,9 +23,15 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
   List<XFile> _media = [];
   DateTime? _selectedDate;
   final TextEditingController _dateController = TextEditingController();
+  Map<String, dynamic> capsule = {};
 
   @override
   Widget build(BuildContext context) {
+    capsule["title"] = "My title";
+    capsule["message"] = "My message";
+    capsule["media"] = [];
+    capsule["capsule_image"] = "rabbit.png";
+
     return Center(
         child: Column(
           children: [
@@ -163,7 +169,7 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
                   children: [
                     IconButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => PreviewScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => PreviewScreen(capsule: capsule)));
                         },
                         icon: const Icon(Icons.find_in_page, size: 50)
                     ),
@@ -174,7 +180,7 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
                   padding: const EdgeInsets.only(right: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenTwo()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenTwo(capsule: capsule)));
                     },
                     child: Text("Next"),
                   ),

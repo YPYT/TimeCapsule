@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:time_machine/time_machine.dart';
 import 'create_screen_3.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,7 +7,8 @@ import 'dart:developer';
 import 'package:image_picker/image_picker.dart';
 
 class BuriedCapsuleScreen extends StatefulWidget {
-  const BuriedCapsuleScreen({super.key});
+  final Map<String, dynamic> capsule;
+  const BuriedCapsuleScreen({super.key, required this.capsule});
 
   @override
   State<BuriedCapsuleScreen> createState() => _BuriedCapsuleScreenState();
@@ -16,22 +18,28 @@ class _BuriedCapsuleScreenState extends State<BuriedCapsuleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime unlockDate = DateTime.parse(widget.capsule["date"]);
+    LocalDate localUnlockDate = LocalDate.dateTime(unlockDate);
+    DateTime buriedDate = DateTime.parse(widget.capsule["buried_date"]);
+    Period dateDiff = localUnlockDate.periodSince(LocalDate.today());
+    String dateDiffString = "years: ${dateDiff.years}; months: ${dateDiff.months}; days: ${dateDiff.days}";
+
     return Center(
         child: Column(
           children: [
             Text("Buried your time capsule!"),
-            Text("Buried on X"),
+            Text("Buried on ${buriedDate.day}/${buriedDate.month}/${buriedDate.year}"),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Column(
                   children: [
                     Text("For"),
-                    Text("PLACEHOLDER")
+                    Text("Emily")
                   ]
                 ),
                 Image(
-                  image: AssetImage("assets/rabbit.png"),
+                  image: AssetImage("assets/${widget.capsule["capsule_image"]}"),
                 ),
               ],
             ),
@@ -43,32 +51,11 @@ class _BuriedCapsuleScreenState extends State<BuriedCapsuleScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            Text("LOCATION"),
-            Text("REMAINING TIME"),
-            Text("UNLOCK DATE"),
+            Text(widget.capsule["address"]),
+            Text(dateDiffString),
+            Text("Unlock: ${unlockDate.day}/${unlockDate.month}/${unlockDate.year}"),
           ],
         )
     );
-  }
-
-  Future<void> _onBuryPressed() async {
-    final prefs = await SharedPreferences.getInstance();
-/*
-    // Get capsules list
-    final capsulesString = prefs.getString('capsules') ?? "[]";
-    final capsules = jsonDecode(capsulesString) as List<dynamic>;
-
-    if (_title.isEmpty || _message.isEmpty || _address.isEmpty || _selectedDate == null) {
-      return;
-    }
-
-    // Save media files
-    List<String> mediaPaths = [];
-    final String docDir = (await getApplicationDocumentsDirectory()).path;
-    for (XFile mediaFile in _media) {
-      final String savedFilePath = "$docDir/${mediaFile.name}";
-      await mediaFile.saveTo(savedFilePath);
-      mediaPaths.add(savedFilePath);
-    }*/
   }
 }

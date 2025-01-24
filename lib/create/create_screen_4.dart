@@ -5,9 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
 import 'package:image_picker/image_picker.dart';
 import 'buried_capsule.dart';
+import 'dart:convert';
 
 class CreateScreenFour extends StatefulWidget {
-  const CreateScreenFour({super.key});
+  final Map<String, dynamic> capsule;
+  const CreateScreenFour({super.key, required this.capsule});
 
   @override
   State<CreateScreenFour> createState() => _CreateScreenFourState();
@@ -17,6 +19,8 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime unlockedDate = DateTime.parse(widget.capsule["date"]);
+
     return Center(
         child: Column(
           children: [
@@ -88,7 +92,7 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("For Emily in 3 years"),
+                        Text(widget.capsule["title"]),
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.find_in_page, size: 40)
@@ -107,7 +111,7 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("For Emily in 3 years"),
+                        Text(widget.capsule["address"]),
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.map, size: 40)
@@ -126,7 +130,7 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("For Emily in 3 years"),
+                        Text("Emily"),
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.group_add, size: 40)
@@ -145,7 +149,7 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("For Emily in 3 years"),
+                        Text("${unlockedDate.day}/${unlockedDate.month}/${unlockedDate.year}"),
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.calendar_today, size: 40)
@@ -155,7 +159,7 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      _onBuryPressed(context);
+                      _onBuryPressed(context, widget.capsule);
                     },
                     child: Text("Bury!"),
                   ),
@@ -163,48 +167,37 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
               ),
             ),
             SizedBox(height: 20),
-            Row(
-                spacing: 170,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("Back"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenThree()));
-                    },
-                    child: Text("Next"),
-                  ),
-                ]
-            )
           ],
         )
     );
   }
 
-  Future<void> _onBuryPressed(context) async {
+  Future<void> _onBuryPressed(context, capsule) async {
     final prefs = await SharedPreferences.getInstance();
-/*
+
+    widget.capsule["buried_date"] = DateTime.now().toString();
+    widget.capsule["unlocked"] = 0;
+
     // Get capsules list
     final capsulesString = prefs.getString('capsules') ?? "[]";
     final capsules = jsonDecode(capsulesString) as List<dynamic>;
 
-    if (_title.isEmpty || _message.isEmpty || _address.isEmpty || _selectedDate == null) {
-      return;
-    }
+    capsules.add(widget.capsule);
 
     // Save media files
     List<String> mediaPaths = [];
     final String docDir = (await getApplicationDocumentsDirectory()).path;
-    for (XFile mediaFile in _media) {
+    for (XFile mediaFile in widget.capsule["media"]) {
       final String savedFilePath = "$docDir/${mediaFile.name}";
       await mediaFile.saveTo(savedFilePath);
       mediaPaths.add(savedFilePath);
-    }*/
-    Navigator.push(context, MaterialPageRoute(builder: (context) => BuriedCapsuleScreen()));
+    }
+
+    // Write back to storage
+    final finalCapsulesString = jsonEncode(capsules);
+    log('final capsules: $finalCapsulesString');
+    await prefs.setString('capsules', finalCapsulesString);
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) => BuriedCapsuleScreen(capsule: capsule,)));
   }
 }

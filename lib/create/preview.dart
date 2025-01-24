@@ -8,7 +8,8 @@ import 'dart:developer';
 import 'create_screen_2.dart';
 
 class PreviewScreen extends StatefulWidget {
-  const PreviewScreen({super.key});
+  final Map<String, dynamic> capsule;
+  const PreviewScreen({super.key, required this.capsule});
 
   @override
   State<PreviewScreen> createState() => _PreviewScreenState();
@@ -76,13 +77,13 @@ class _PreviewScreenState extends State<PreviewScreen> {
               ),
               child: Column(
                 children: [
-                  Text("TITLE"),
+                  Text(widget.capsule["title"]),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     spacing: 20,
                     children: [
                       Image(
-                        image: AssetImage("assets/smiley.png"),
+                        image: AssetImage("assets/${widget.capsule["capsule_image"]}"),
                       ),
                     ],
                   ),
@@ -91,7 +92,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     decoration: BoxDecoration(
                       color: Colors.yellow,
                     ),
-                    child: Text("MESSAGE"),
+                    child: Text(widget.capsule["message"]),
                   ),
                   //Row(
                   //  children: mediaChildren,
