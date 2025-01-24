@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'create_screen_3.dart';
+import 'package:map_location_picker/map_location_picker.dart';
 
 class CreateScreenTwo extends StatefulWidget {
   final Map<String, dynamic> capsule;
@@ -13,8 +14,6 @@ class _CreateScreenTwoState extends State<CreateScreenTwo> {
 
   @override
   Widget build(BuildContext context) {
-    widget.capsule["address"] = "My capsule's address";
-
     return Center(
         child: Column(
           children: [
@@ -63,36 +62,39 @@ class _CreateScreenTwoState extends State<CreateScreenTwo> {
                 ),
               ],
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 20),
             Container(
-              height: 500,
+              height: 570,
               width: double.infinity,
               margin: const EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 0),
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                 border: Border.all(color: Color(0xFFD9D9D9), width: 1.5),
                 borderRadius: BorderRadius.circular(10),
               ),
-            ),
-            SizedBox(height: 20),
-            Row(
-              spacing: 170,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("Back"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
+              child: MapLocationPicker(
+                apiKey: "AIzaSyBra6IL9KgvYrPwBLj4NCKu1Ly6OcTR1Oo",
+                liteModeEnabled: true,
+                currentLatLng: const LatLng(-33.857055, 151.214881),
+                location: Location(lat: -33.857055, lng: 151.214881),
+                radius: 100000,
+                region: "au",
+                onNext: (GeocodingResult? result) {
+                  if (result != null) {
+                    //widget.capsule["address"] = StreetAddress.fromGeocodingResult(result).addressLine!;
+                    widget.capsule["address"] = result.formattedAddress!;
                     Navigator.push(context, MaterialPageRoute(builder: (context) => CreateScreenThree(capsule: widget.capsule)));
-                  },
-                  child: Text("Next"),
-                ),
-              ]
-            )
+                  }
+                },
+              ),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Back"),
+            ),
           ],
         )
     );

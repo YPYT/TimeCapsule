@@ -112,7 +112,15 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(widget.capsule["address"]),
+                        SizedBox(
+                          width: 280,
+                          child: Text(
+                              widget.capsule["address"],
+                              softWrap: false,
+                              overflow: TextOverflow.fade,
+                              maxLines: 1
+                          )
+                        ),
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.map, size: 40)
