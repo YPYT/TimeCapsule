@@ -19,7 +19,7 @@ class _BuriedCapsuleScreenState extends State<BuriedCapsuleScreen> {
     DateTime buriedDate = DateTime.parse(widget.capsule["buried_date"]);
     Period dateDiff = localUnlockDate.periodSince(LocalDate.today());
 
-    NumberFormat formatter = new NumberFormat("00");
+    NumberFormat formatter = NumberFormat("00");
 
     return Center(
         child: Column(

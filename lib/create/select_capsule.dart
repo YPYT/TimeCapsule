@@ -1,12 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:map_location_picker/map_location_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer';
-import 'create_screen_2.dart';
-import 'preview.dart';
 
 class SelectCapsuleScreen extends StatefulWidget {
   const SelectCapsuleScreen({super.key});

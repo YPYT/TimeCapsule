@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'unlocked_capsule.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import 'names.dart';
 
 class ReadyToUnlockRow extends StatefulWidget {
   final dynamic capsule;
@@ -23,7 +24,7 @@ class _ReadyToUnlockRowState extends State<ReadyToUnlockRow> {
       width: double.infinity,
       alignment: Alignment.center,
       margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 0),
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 1.5),
         borderRadius: BorderRadius.circular(10),
@@ -31,19 +32,34 @@ class _ReadyToUnlockRowState extends State<ReadyToUnlockRow> {
       child: Row(
         spacing: 40,
         children: [
-          Image(
-            image: AssetImage("assets/${widget.capsule["capsule_image"]}"),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Image(
+              image: AssetImage("assets/${widget.capsule["capsule_image"]}"),
+            ),
           ),
           Column(
-              children: [
-                Text("Myself"),
-                Text("Buried: ${buriedDate.day}/${buriedDate.month}/${buriedDate.year}"),
-                ElevatedButton.icon(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 5,
+            children: [
+              Text(getName(widget.capsule["sender"]), style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold
+              )),
+              Text("Buried: ${buriedDate.day}/${buriedDate.month}/${buriedDate.year}"),
+              SizedBox(
+                width: 120,
+                height: 30,
+                child: ElevatedButton.icon(
                   onPressed: () {_onUnlockPressed(context, widget.index);},
                   label: const Text("Unlock"),
                   icon: const Icon(Icons.key),
+                  //style: ElevatedButton.styleFrom(
+                  //  maximumSize: Size(120, 20)
+                  //),
                 ),
-              ]
+              ),
+            ]
           ),
         ],
       ),
