@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
 import 'create_screen_2.dart';
 import 'preview.dart';
+import 'message_input.dart';
 
 class CreateScreenOne extends StatefulWidget {
   const CreateScreenOne({super.key});
@@ -16,19 +17,12 @@ class CreateScreenOne extends StatefulWidget {
 }
 
 class _CreateScreenOneState extends State<CreateScreenOne> {
-  String _title = "";
-  String _message = "";
-  String _address = "";
-  int _recipient = 0;
-  List<XFile> _media = [];
-  DateTime? _selectedDate;
-  final TextEditingController _dateController = TextEditingController();
   Map<String, dynamic> capsule = {};
 
   @override
   Widget build(BuildContext context) {
-    capsule["title"] = "My title";
-    capsule["message"] = "My message";
+    capsule["title"] = "";
+    capsule["message"] = "";
     capsule["media"] = [];
     capsule["capsule_image"] = "rabbit.png";
 
@@ -137,24 +131,29 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
                     ),
                   ),
                 ),
-                Container(
-                  height: 150,
-                  width: 170,
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(left: 0, right: 20, top: 20, bottom: 0),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xffffc890),
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(Icons.mail),
-                        Text("Write message"),
-                      ],
+                GestureDetector(
+                  onTap: () {
+                    _goToMessageScreen();
+                  },
+                  child: Container(
+                    height: 150,
+                    width: 170,
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left: 0, right: 20, top: 20, bottom: 0),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xffffc890),
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.mail),
+                          Text("Write message"),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -193,73 +192,13 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
     );
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2200)
+  Future<void> _goToMessageScreen() async {
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MessageInputScreen(
+            title: capsule["title"], message: capsule["message"]))
     );
-
-    if (picked != null) {
-      _selectedDate = picked;
-      setState(() {
-        _dateController.text = picked.toString().split(" ")[0];
-      });
-    }
-  }
-
-  Future<void> _onBuryPressed() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    // Get capsules list
-    final capsulesString = prefs.getString('capsules') ?? "[]";
-    final capsules = jsonDecode(capsulesString) as List<dynamic>;
-
-    if (_title.isEmpty || _message.isEmpty || _address.isEmpty || _selectedDate == null) {
-      return;
-    }
-
-    // Save media files
-    List<String> mediaPaths = [];
-    final String docDir = (await getApplicationDocumentsDirectory()).path;
-    for (XFile mediaFile in _media) {
-      final String savedFilePath = "$docDir/${mediaFile.name}";
-      await mediaFile.saveTo(savedFilePath);
-      mediaPaths.add(savedFilePath);
-    }
-
-    // Insert new capsule into list
-    final capsuleData = {
-      "title": _title,
-      "message": _message,
-      "date": _selectedDate.toString(),
-      "address": _address,
-      "recipient": _recipient,
-      "media": mediaPaths,
-      "sender": 0,
-      "unlocked": 0,
-      "buried_date": DateTime.now().toString(),
-    };
-    capsules.add(capsuleData);
-
-    // Write back to storage
-    final finalCapsulesString = jsonEncode(capsules);
-    log('final capsules: $finalCapsulesString');
-    await prefs.setString('capsules', finalCapsulesString);
-  }
-
-  Future<void> _onPickImagePressed() async {
-    final ImagePicker picker = ImagePicker();
-    final List<XFile> medias = await picker.pickMultipleMedia();
-    for (XFile file in medias) {
-      _media.add(file);
-    }
-  }
-
-  // TEMP
-  Future<void> _onDeleteAllDataPressed() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('capsules');
+    capsule["title"] = result[0];
+    capsule["message"] = result[1];
   }
 }
