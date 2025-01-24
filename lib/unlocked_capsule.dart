@@ -82,7 +82,7 @@ class _UnlockedCapsuleScreenState extends State<UnlockedCapsuleScreen> {
                 margin: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 20),
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Color(0xFFFEF7A0),
+                  color: Color(0x47FEA0D3),
                 ),
                 child: Text(
                   widget.capsule["message"],
