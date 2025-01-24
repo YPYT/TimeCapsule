@@ -1,13 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:map_location_picker/map_location_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer';
 import 'create_screen_2.dart';
 import 'preview.dart';
 import 'message_input.dart';
+import 'dart:io';
+import 'dart:developer';
 
 class CreateScreenOne extends StatefulWidget {
   const CreateScreenOne({super.key});
@@ -17,14 +14,27 @@ class CreateScreenOne extends StatefulWidget {
 }
 
 class _CreateScreenOneState extends State<CreateScreenOne> {
-  Map<String, dynamic> capsule = {};
+  Map<String, dynamic> capsule = {
+    "title": "",
+    "message": "",
+    "capsule_image": "rabbit.png",
+    "tmp_media": [],
+  };
 
   @override
   Widget build(BuildContext context) {
-    capsule["title"] = "";
-    capsule["message"] = "";
-    capsule["media"] = [];
-    capsule["capsule_image"] = "rabbit.png";
+    List<Image> mediaChildren = [];
+    for (XFile mediaFile in capsule["tmp_media"]) {
+      String mediaPath = mediaFile.path;
+      log(mediaPath);
+      if (mediaPath.endsWith(".jpg")) {
+        mediaChildren.add(Image(
+          image: FileImage(File(mediaPath)),
+          width: 80,
+          height: 80,
+        ));
+      }
+    }
 
     return Center(
         child: Column(
@@ -75,36 +85,45 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
               ],
             ),
             SizedBox(height: 15),
-            Container(
-              height: 150,
-              width: double.infinity,
-              alignment: Alignment.center,
-              margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 0),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  gradient: LinearGradient(
-                      colors: [
-                        Color(0xFFFFAD49),
-                        Color(0xffffc890),
-                      ]
-                  )
-              ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(Icons.image),
-                    Text("Select photo/video")
-                  ],
+            GestureDetector(
+              onTap: () {
+                _onPickImagePressed();
+              },
+              child: Container(
+                height: 150,
+                width: double.infinity,
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 0),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: LinearGradient(
+                        colors: [
+                          Color(0xFFFFAD49),
+                          Color(0xffffc890),
+                        ]
+                    )
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.image),
+                      Text("Select photo/video")
+                    ],
+                  ),
                 ),
               ),
             ),
             Container(
               height: 150,
+              margin: const EdgeInsets.only(left: 15, right: 15),
               width: double.infinity,
               decoration: BoxDecoration(color: Colors.white),
+              child: Row(
+                children: mediaChildren,
+              ),
             ),
             Row(
               spacing: 22,
@@ -200,5 +219,15 @@ class _CreateScreenOneState extends State<CreateScreenOne> {
     );
     capsule["title"] = result[0];
     capsule["message"] = result[1];
+  }
+
+  Future<void> _onPickImagePressed() async {
+    final ImagePicker picker = ImagePicker();
+    final List<XFile> medias = await picker.pickMultipleMedia();
+    for (XFile file in medias) {
+      setState(() {
+        capsule["tmp_media"].add(file);
+      });
+    }
   }
 }

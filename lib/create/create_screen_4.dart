@@ -187,11 +187,14 @@ class _CreateScreenFourState extends State<CreateScreenFour> {
     // Save media files
     List<String> mediaPaths = [];
     final String docDir = (await getApplicationDocumentsDirectory()).path;
-    for (XFile mediaFile in widget.capsule["media"]) {
+    for (XFile mediaFile in widget.capsule["tmp_media"]) {
       final String savedFilePath = "$docDir/${mediaFile.name}";
       await mediaFile.saveTo(savedFilePath);
       mediaPaths.add(savedFilePath);
+      log(savedFilePath);
     }
+    widget.capsule["media"] = mediaPaths;
+    widget.capsule.remove("tmp_media");
 
     // Write back to storage
     final finalCapsulesString = jsonEncode(capsules);
