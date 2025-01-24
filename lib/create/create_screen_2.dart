@@ -18,7 +18,7 @@ class _CreateScreenTwoState extends State<CreateScreenTwo> {
         child: Column(
           children: [
             Row(
-              spacing: 5,
+              spacing: 2,
               mainAxisSize: MainAxisSize.min,
               children: [
                 ElevatedButton(
@@ -26,39 +26,43 @@ class _CreateScreenTwoState extends State<CreateScreenTwo> {
                   style: ElevatedButton.styleFrom(
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(15),
-                    iconSize: 35,
+                    iconSize: 30,
+                    backgroundColor: Color(0xFFF7D38E),
                   ),
-                  child: Icon(Icons.window, color: Colors.black),
+                  child: Icon(Icons.window, color: Colors.white),
                 ),
-                Icon(Icons.arrow_right_alt, size: 30),
+                Icon(Icons.arrow_right_alt, size: 30, color: Color(0xFF797979)),
                 ElevatedButton(
                   onPressed:  () {},
                   style: ElevatedButton.styleFrom(
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(15),
-                    iconSize: 35,
+                    iconSize: 30,
+                    backgroundColor: Color(0xFFBFA36F),
                   ),
-                  child: Icon(Icons.location_on, color: Colors.black),
+                  child: Icon(Icons.location_on, color: Colors.white),
                 ),
-                Icon(Icons.arrow_right_alt, size: 30),
+                Icon(Icons.arrow_right_alt, size: 30, color: Color(0xFF797979)),
                 ElevatedButton(
                   onPressed:  () {},
                   style: ElevatedButton.styleFrom(
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(15),
-                    iconSize: 35,
+                    iconSize: 30,
+                    backgroundColor: Color(0xFFF7D38E),
                   ),
-                  child: Icon(Icons.outgoing_mail, color: Colors.black),
+                  child: Icon(Icons.outgoing_mail, color: Colors.white),
                 ),
-                Icon(Icons.arrow_right_alt, size: 30),
+                Icon(Icons.arrow_right_alt, size: 30, color: Color(0xFF797979)),
                 ElevatedButton(
                   onPressed:  () {},
                   style: ElevatedButton.styleFrom(
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(15),
-                    iconSize: 35,
+                    iconSize: 30,
+                    backgroundColor: Color(0xFFF7D38E),
                   ),
-                  child: Icon(Icons.mobile_friendly, color: Colors.black),
+                  child: Icon(Icons.mobile_friendly, color: Colors.white),
                 ),
               ],
             ),
