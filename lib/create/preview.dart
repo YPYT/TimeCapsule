@@ -90,7 +90,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                   Text("Myself"),
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.yellow,
+                      color: Color(0xFFFEF7A0),
                     ),
                     child: Text(widget.capsule["message"]),
                   ),

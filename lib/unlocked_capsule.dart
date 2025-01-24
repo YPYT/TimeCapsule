@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'names.dart';
 
 class UnlockedCapsuleScreen extends StatefulWidget {
   final dynamic capsule;
@@ -34,7 +35,7 @@ class _UnlockedCapsuleScreenState extends State<UnlockedCapsuleScreen> {
         Container(
           height: 650,
           width: double.infinity,
-          margin: const EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 0),
+          margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 0),
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 1.5),
@@ -42,7 +43,13 @@ class _UnlockedCapsuleScreenState extends State<UnlockedCapsuleScreen> {
           ),
           child: Column(
             children: [
-              Text(widget.capsule["title"]),
+              Text(
+                widget.capsule["title"],
+                style: TextStyle(
+                  fontSize: 28,
+                ),
+              ),
+              SizedBox(height: 10),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 spacing: 20,
@@ -51,17 +58,32 @@ class _UnlockedCapsuleScreenState extends State<UnlockedCapsuleScreen> {
                     image: AssetImage("assets/${widget.capsule["capsule_image"]}"),
                   ),
                   Image(
-                    image: AssetImage("assets/smiley.png"),
+                    image: AssetImage("assets/map.png"),
                   ),
                 ],
               ),
+              SizedBox(height: 5),
               Text(widget.capsule["address"]),
-              Text("Myself"),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.yellow,
+              SizedBox(height: 25),
+              Text(
+                getName(widget.capsule["sender"]),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
                 ),
-                child: Text(widget.capsule["message"]),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 20),
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Color(0xFFFEF7A0),
+                ),
+                child: Text(
+                  widget.capsule["message"],
+                  style: TextStyle(
+                      fontSize: 13,
+                  ),
+                ),
               ),
               Row(
                children: mediaChildren,
