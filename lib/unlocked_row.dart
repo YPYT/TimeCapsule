@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'unlocked_capsule.dart';
+import 'names.dart';
 
 class UnlockedRow extends StatefulWidget {
   final dynamic capsule;
@@ -26,28 +27,57 @@ class _UnlockedRowState extends State<UnlockedRow> {
         width: double.infinity,
         alignment: Alignment.center,
         margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 0),
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(top: 20, left: 20),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 1.5),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
-          spacing: 50,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image(
                   image: AssetImage("assets/${widget.capsule["capsule_image"]}"),
                 ),
-                Text("Myself"),
+                Padding(
+                  padding: const EdgeInsets.only(left: 3),
+                  child: Text(getName(widget.capsule["sender"]), style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  )),
+                ),
               ],
             ),
-            Column(
+            SizedBox(width: 50),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Title: ${widget.capsule["title"]}"),
-                  Text("Unlocked: ${unlockedDate.day}/${unlockedDate.month}/${unlockedDate.year}"),
-                  Text("Buried: ${buriedDate.day}/${buriedDate.month}/${buriedDate.year}"),
+                  Text("Title:", style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  )),
+                  Text("Unlocked:", style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  )),
+                  Text("Buried:", style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  )),
                 ]
+              ),
+            ),
+            SizedBox(width: 5),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("${widget.capsule["title"]}"),
+                    Text("${unlockedDate.day}/${unlockedDate.month}/${unlockedDate.year}"),
+                    Text("${buriedDate.day}/${buriedDate.month}/${buriedDate.year}"),
+                  ]
+              ),
             ),
           ],
         ),
