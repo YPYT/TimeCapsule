@@ -14,7 +14,7 @@ class _SelectCapsuleScreenState extends State<SelectCapsuleScreen> {
         child: Column(
           children: [
             Row(
-              spacing: 5,
+              spacing: 2,
               mainAxisSize: MainAxisSize.min,
               children: [
                 ElevatedButton(
@@ -22,39 +22,43 @@ class _SelectCapsuleScreenState extends State<SelectCapsuleScreen> {
                   style: ElevatedButton.styleFrom(
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(15),
-                    iconSize: 35,
+                    iconSize: 30,
+                    backgroundColor: Color(0xFFBFA36F),
                   ),
-                  child: Icon(Icons.window, color: Colors.black),
+                  child: Icon(Icons.window, color: Colors.white),
                 ),
-                Icon(Icons.arrow_right_alt, size: 30),
+                Icon(Icons.arrow_right_alt, size: 30, color: Color(0xFF797979)),
                 ElevatedButton(
                   onPressed:  () {},
                   style: ElevatedButton.styleFrom(
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(15),
-                    iconSize: 35,
+                    iconSize: 30,
+                    backgroundColor: Color(0xFFF7D38E),
                   ),
-                  child: Icon(Icons.location_on, color: Colors.black),
+                  child: Icon(Icons.location_on, color: Colors.white),
                 ),
-                Icon(Icons.arrow_right_alt, size: 30),
+                Icon(Icons.arrow_right_alt, size: 30, color: Color(0xFF797979)),
                 ElevatedButton(
                   onPressed:  () {},
                   style: ElevatedButton.styleFrom(
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(15),
-                    iconSize: 35,
+                    iconSize: 30,
+                    backgroundColor: Color(0xFFF7D38E),
                   ),
-                  child: Icon(Icons.outgoing_mail, color: Colors.black),
+                  child: Icon(Icons.outgoing_mail, color: Colors.white),
                 ),
-                Icon(Icons.arrow_right_alt, size: 30),
+                Icon(Icons.arrow_right_alt, size: 30, color: Color(0xFF797979)),
                 ElevatedButton(
                   onPressed:  () {},
                   style: ElevatedButton.styleFrom(
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(15),
-                    iconSize: 35,
+                    iconSize: 30,
+                    backgroundColor: Color(0xFFF7D38E),
                   ),
-                  child: Icon(Icons.mobile_friendly, color: Colors.black),
+                  child: Icon(Icons.mobile_friendly, color: Colors.white),
                 ),
               ],
             ),
@@ -77,11 +81,11 @@ class _SelectCapsuleScreenState extends State<SelectCapsuleScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {Navigator.pop(context, "rabbit.png");},
-                        child: Image(image: AssetImage("assets/rabbit.png"))
+                        child: Image(image: AssetImage("assets/rabbit_big.png"), width: 120)
                       ),
                       GestureDetector(
                           onTap: () {Navigator.pop(context, "apple.png");},
-                          child: Image(image: AssetImage("assets/apple.png"))
+                          child: Image(image: AssetImage("assets/apple_big.png"), width: 120)
                       ),
                     ],
                   ),
@@ -90,11 +94,11 @@ class _SelectCapsuleScreenState extends State<SelectCapsuleScreen> {
                     children: [
                       GestureDetector(
                           onTap: () {Navigator.pop(context, "family.png");},
-                          child: Image(image: AssetImage("assets/family.png"))
+                          child: Image(image: AssetImage("assets/family_big.png"), width: 120)
                       ),
                       GestureDetector(
                           onTap: () {Navigator.pop(context, "heartsmiley.png");},
-                          child: Image(image: AssetImage("assets/heartsmiley.png"))
+                          child: Image(image: AssetImage("assets/heartsmiley_big.png"), width: 120)
                       ),
                     ],
                   ),
@@ -103,11 +107,11 @@ class _SelectCapsuleScreenState extends State<SelectCapsuleScreen> {
                     children: [
                       GestureDetector(
                           onTap: () {Navigator.pop(context, "hourglass.png");},
-                          child: Image(image: AssetImage("assets/hourglass.png"))
+                          child: Image(image: AssetImage("assets/hourglass_big.png"), width: 120)
                       ),
                       GestureDetector(
                           onTap: () {Navigator.pop(context, "smiley.png");},
-                          child: Image(image: AssetImage("assets/smiley.png"))
+                          child: Image(image: AssetImage("assets/smiley_big.png"), width: 120)
                       ),
                     ],
                   )
