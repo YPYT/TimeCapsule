@@ -46,6 +46,18 @@ class _ViewScreenContentState extends State<ViewScreenContent> {
 
   @override
   Widget build(BuildContext context) {
+    Color tabOneColour = Color(0xFFD9D9D9);
+    Color tabTwoColour = Color(0xFFD9D9D9);
+    Color tabOneFGColour = Colors.black;
+    Color tabTwoFGColour = Colors.black;
+    if (_tabIndex == 0) {
+      tabOneColour = Color(0xFF797979);
+      tabOneFGColour = Colors.white;
+    } else {
+      tabTwoColour = Color(0xFF797979);
+      tabTwoFGColour = Colors.white;
+    }
+
     return Center(
       child: FutureBuilder<List<dynamic>>(
         future: _capsules,
@@ -84,7 +96,8 @@ class _ViewScreenContentState extends State<ViewScreenContent> {
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize: Size(160, 30),
-                        //shape:
+                        backgroundColor: tabOneColour,
+                        foregroundColor: tabOneFGColour
                       ),
                       child: const Text('Ready to Unlock')
                     ),
@@ -96,7 +109,8 @@ class _ViewScreenContentState extends State<ViewScreenContent> {
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize: Size(160, 30),
-                        //shape:
+                        backgroundColor: tabTwoColour,
+                        foregroundColor: tabTwoFGColour
                       ),
                       child: const Text('List')
                     ),
