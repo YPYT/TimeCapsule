@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'create/create_capsule.dart';
 import 'view_capsule.dart';
 import 'history_capsule.dart';
-import 'create/create_capsule_old.dart';
+//import 'create/create_capsule_old.dart';
 
 void main() {
   runApp(const MyApp());
